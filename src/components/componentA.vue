@@ -10,7 +10,7 @@
       <tr v-for="(todo,index) in listTodo" v-bind:key="index">
         <td @click="informationTask(index)">{{ todo.name }}</td>
         <td>{{ todo.country }}</td>
-        <td>{{ todo.people }}</td>
+        <td><router-link :to="{name:'project-name',params:{name:todo.people}}">{{ todo.people }}</router-link></td>
         <td>
           <button @click="editTask(index)">Edit</button>
           <button @click="removeTask(index)">Remove</button>
@@ -19,7 +19,7 @@
       </tbody>
     </table>
     <div class="add-task">
-      <input type="text" placeholder="Name" v-model="task.name"/>
+      <input type="text" ref="nameTask" placeholder="Name" v-model="task.name"/>
       <input type="text" placeholder="Country" v-model="task.country"/>
       <input type="text" placeholder="People" v-model="task.people"/>
       <button @click="addTask">Add</button>
@@ -34,7 +34,7 @@ export default {
   inheritAttrs: false,
   props:{
     propsStatic:String,
-    nameComponent:Object
+    nameComponent:String
   },
   data() {
     return {
@@ -61,6 +61,9 @@ export default {
       task: {name: '', country: '', people: ''}
     };
   },
+  mounted() {
+    this.focusInput();
+  },
   methods: {
     addTask() {
       if (this.task.name !== '') {
@@ -70,6 +73,7 @@ export default {
         this.task.country = '';
         this.task.people = '';
       }
+      console.log(this.$route.params);
       console.log(this.$el);
     },
     removeTask(index) {
@@ -80,6 +84,9 @@ export default {
     },
     informationTask(index){
       this.$emit('myEvent',this.listTodo[index]);
+    },
+    focusInput() {
+      this.$refs.nameTask.focus();
     }
   },
   computed: {

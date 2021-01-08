@@ -1,30 +1,14 @@
 <template>
-  <componentA props-static="Hello" :nameComponent = "this.title" @my-event="eventFunction"></componentA>
-  <componentB v-if="toggle" :props-dynamic ="this.task"></componentB>
+  <componentMenu />
+  <router-view></router-view>
 </template>
 
 <script>
-import componentA from "@/components/componentA";
-import componentB from "@/components/componentB";
+  import componentMenu from "@/components/componentMenu";
 export default {
   name: 'App',
   components: {
-    componentA,
-    componentB
-  },
-  data() {
-    return {
-      toggle:false,
-      task: '',
-      title:'Components A'
-    }
-  },
-  methods: {
-    eventFunction(task){
-      this.toggle = true;
-      this.task = task;
-      this.title = task.name;
-    }
+    componentMenu,
   }
 }
 </script>
@@ -36,6 +20,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+body{
+  margin: 0;
+  padding: 0;
 }
 </style>
