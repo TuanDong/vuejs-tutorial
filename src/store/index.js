@@ -4,13 +4,16 @@ import { createStore } from 'vuex'
 const store = createStore({
     state () {
         return {
-            count: 0
+            count: 0,
+            counter: 1
         }
     },
     mutations: {
-        increment (state) {
-            state.count++
+        increment (state,value) {
+            state.count = state.count + value;
         }
-    }
+    },
+    getters: {},
+    actions:{}
 })
 export default store;

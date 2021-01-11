@@ -72,6 +72,7 @@ export default {
         this.task.name = '';
         this.task.country = '';
         this.task.people = '';
+        this.$store.commit('increment',5);
       }
       console.log(this.$route.params);
       console.log(this.$el);
